@@ -1,0 +1,19 @@
+-CRUD hóa đơn:
+
+*đầu tiên là cho load tblFood theo IdCategory lên
+
+*thêm món vào bill (bàn) đang chọn:
++TH 1:
+- bàn chưa có hóa đơn
+==> new hóa đơn + billInfo
+
+
+
++TH 2:
+-bàn đã có hóa đơn và muốn gọi thêm món chưa có
+==> update hóa đơn thêm vào món mới
+
++TH 3:
+-bàn đã có hóa đơn và muốn gọi thêm món đã có
+==>update hóa đơn add thêm món cũ
+
