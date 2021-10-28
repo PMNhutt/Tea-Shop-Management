@@ -214,6 +214,7 @@ namespace TeaShopManagement
             // 
             // txtBoxUserName
             // 
+            this.txtBoxUserName.Enabled = false;
             this.txtBoxUserName.Location = new System.Drawing.Point(219, 17);
             this.txtBoxUserName.Name = "txtBoxUserName";
             this.txtBoxUserName.ReadOnly = true;

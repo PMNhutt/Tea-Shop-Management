@@ -13,6 +13,7 @@ namespace TeaShopManagement.DTO
         private string name;
         private int iDCategory;
         private float price;
+     
 
         public int ID { get => iD; set => iD = value; }
         public string Name { get => name; set => name = value; }
@@ -25,6 +26,7 @@ namespace TeaShopManagement.DTO
             this.Name = name;
             this.IDCategory = idCategory;
             this.Price = price;
+            
         }
 
         public Food(DataRow row)

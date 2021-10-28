@@ -35,6 +35,23 @@ namespace TeaShopManagement.DAO
             return false;
         }
 
-        
+        public Account GetAccByUserName(string userName)
+        {
+            DataTable data = DataProvider.Instance.ExecuteQuery("select * from tblAccount where userName = '"+ userName +"'");
+
+            foreach (DataRow item in data.Rows)
+            {
+                Account acc = new Account(item);
+                return acc;
+            }
+            return null;
+        }
+
+        public bool UpdateAccountInfo(string userName, string displayName, string pass, string newPass)
+        {
+            //
+            int result = DataProvider.Instance.ExecuteNonQuery("exec USP_UpdateAccountInfo @userName , @displayName , @passWord , @newPass", new object[] {userName, displayName, pass, newPass });
+            return result > 0;
+        }
     }
 }

@@ -42,13 +42,13 @@ namespace TeaShopManagement.DAO
             return list;
         }
 
-        public List<Menu> GetListPaidMenuByTable(int id)
+        public List<Menu> GetListPaidMenuByIdBill(int id)
         {
             List<Menu> list = new List<Menu>();
 
             string query = "select f.name,binfo.count,f.price, f.price*binfo.count as totalprice  " +
                 "from tblBillInfo as binfo, tblBill as bill, tblFoods as f " +
-                "where binfo.idBill = bill.id and binfo.idFood = f.id and bill.status = 'PAID' and bill.idTable = " + id;
+                "where binfo.idBill = bill.id and binfo.idFood = f.id and bill.status = 'PAID' and bill.id = " + id;
 
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 

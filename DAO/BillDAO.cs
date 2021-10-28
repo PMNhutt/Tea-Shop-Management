@@ -69,7 +69,7 @@ namespace TeaShopManagement.DAO
 
         public DataTable GetListBillInfo (DateTime checkIn, DateTime checkOut)
         {
-            string query = "select t.name as [Table Name], b.totalPrice as [Total Price], b.dateCheckIn as [Date CheckIn], b.dateCheckOut as [Date CheckOut] from tblBill as b, tblTable as t" +
+            string query = "select b.id as [ID], t.name as [Table Name], b.totalPrice as [Total Price], b.dateCheckIn as [Date CheckIn], b.dateCheckOut as [Date CheckOut] from tblBill as b, tblTable as t" +
                 " where b.dateCheckIn >= '"+ checkIn +"' and b.dateCheckOut <= '"+checkOut +"' " +
                 "and b.status = 'PAID' and t.id = b.idTable";
            return DataProvider.Instance.ExecuteQuery(query);

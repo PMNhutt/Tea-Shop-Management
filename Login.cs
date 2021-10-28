@@ -14,6 +14,7 @@ namespace TeaShopManagement
 {
     public partial class Login : Form
     {
+        public Account accountInfo { get; set; }
         public Login()
         {
             InitializeComponent();
@@ -44,8 +45,11 @@ namespace TeaShopManagement
             string password = txtBoxPass.Text;
             if (CheckLogin(username, password) == true)
             {
-                //bấm login thì form login tắt form này mở lên
-                Tea_Shop_Management form = new Tea_Shop_Management();
+                Account login = AccountDAO.Instance.GetAccByUserName(username);
+                Tea_Shop_Management form = new Tea_Shop_Management(login)
+                {
+                    accountInfo = login
+                };
                 this.Hide();
                 form.ShowDialog();
                 this.Show();

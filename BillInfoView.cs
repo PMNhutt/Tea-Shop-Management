@@ -30,7 +30,7 @@ namespace TeaShopManagement
             listBill.Items.Clear();
 
             float totalP = 0;
-            List<Menu> list = MenuDAO.Instance.GetListPaidMenuByTable(id);
+            List<Menu> list = MenuDAO.Instance.GetListPaidMenuByIdBill(id);
             foreach (Menu item in list)
             {
                 //list view là add vô 1 item, và những cái sau là sub item

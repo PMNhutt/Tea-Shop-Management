@@ -167,3 +167,33 @@ and t.id = b.idTable
 
 go
 select max(id) from tblBill
+go
+
+--Update AccountInfo
+create proc USP_UpdateAccountInfo
+@userName nvarchar(100), @displayName nvarchar(100), @passWord int, @newPass int
+as
+begin
+	declare @isCorrectPass int = 0
+	select @isCorrectPass = count(*) from tblAccount where userName = @userName and password = @passWord
+
+	if(@isCorrectPass = 1)
+	begin
+		if(@newPass = null or @newPass = '')
+		begin
+			update tblAccount set accountName = @displayName where userName = @userName
+		end
+		else
+			update tblAccount set accountName = @displayName, password = @newPass where userName = @userName
+	end
+end
+go
+alter table tblFoods add status nvarchar(30)
+go
+select * from tblFoods where status = 'active' and id = 2
+go
+select status from tblTable where status = 'Empty'
+go
+select f.name,binfo.count,f.price, f.price*binfo.count as totalprice
+from tblBillInfo as binfo, tblBill as bill, tblFoods as f
+where binfo.idBill = bill.id and binfo.idFood = f.id and bill.status = 'PAID' and bill.id = 43

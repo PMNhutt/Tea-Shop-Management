@@ -54,5 +54,16 @@ namespace TeaShopManagement.DAO
             string query = "update tblTable set status = 'Occupied' where id = " + id;
             DataProvider.Instance.ExecuteNonQuery(query);
         }
+
+        public int CheckOccupiedTable()
+        {
+            DataTable data = DataProvider.Instance.ExecuteQuery("select status from tblTable where status = 'Occupied'");
+
+            if (data.Rows.Count > 0)
+            {
+                return 1;
+            }
+            return -1;
+        }
     }
 }

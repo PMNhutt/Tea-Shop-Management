@@ -48,7 +48,7 @@ namespace TeaShopManagement
             this.txtBIdFood = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnPrevieFodd = new System.Windows.Forms.Button();
+            this.btnLoad = new System.Windows.Forms.Button();
             this.btnUpdateFood = new System.Windows.Forms.Button();
             this.btnDeleteFood = new System.Windows.Forms.Button();
             this.btnAddFood = new System.Windows.Forms.Button();
@@ -92,6 +92,8 @@ namespace TeaShopManagement
             this.dgvShowBill = new System.Windows.Forms.DataGridView();
             this.panel9 = new System.Windows.Forms.Panel();
             this.btnShowBill = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.dtpEnd = new System.Windows.Forms.DateTimePicker();
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
             this.Food.SuspendLayout();
@@ -178,6 +180,7 @@ namespace TeaShopManagement
             this.btnSearchFood.TabIndex = 1;
             this.btnSearchFood.Text = "Search";
             this.btnSearchFood.UseVisualStyleBackColor = false;
+            this.btnSearchFood.Click += new System.EventHandler(this.btnSearchFood_Click);
             // 
             // panel3
             // 
@@ -294,6 +297,7 @@ namespace TeaShopManagement
             this.txtBIdFood.ReadOnly = true;
             this.txtBIdFood.Size = new System.Drawing.Size(259, 28);
             this.txtBIdFood.TabIndex = 1;
+            this.txtBIdFood.TextChanged += new System.EventHandler(this.txtBIdFood_TextChanged);
             // 
             // label1
             // 
@@ -307,7 +311,7 @@ namespace TeaShopManagement
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.btnPrevieFodd);
+            this.panel2.Controls.Add(this.btnLoad);
             this.panel2.Controls.Add(this.btnUpdateFood);
             this.panel2.Controls.Add(this.btnDeleteFood);
             this.panel2.Controls.Add(this.btnAddFood);
@@ -316,15 +320,16 @@ namespace TeaShopManagement
             this.panel2.Size = new System.Drawing.Size(438, 68);
             this.panel2.TabIndex = 1;
             // 
-            // btnPrevieFodd
+            // btnLoad
             // 
-            this.btnPrevieFodd.BackColor = System.Drawing.Color.LightSalmon;
-            this.btnPrevieFodd.Location = new System.Drawing.Point(290, 3);
-            this.btnPrevieFodd.Name = "btnPrevieFodd";
-            this.btnPrevieFodd.Size = new System.Drawing.Size(89, 62);
-            this.btnPrevieFodd.TabIndex = 3;
-            this.btnPrevieFodd.Text = "Preview";
-            this.btnPrevieFodd.UseVisualStyleBackColor = false;
+            this.btnLoad.BackColor = System.Drawing.Color.LightSalmon;
+            this.btnLoad.Location = new System.Drawing.Point(290, 3);
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Size = new System.Drawing.Size(89, 62);
+            this.btnLoad.TabIndex = 3;
+            this.btnLoad.Text = "Load";
+            this.btnLoad.UseVisualStyleBackColor = false;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
             // btnUpdateFood
             // 
@@ -335,6 +340,7 @@ namespace TeaShopManagement
             this.btnUpdateFood.TabIndex = 2;
             this.btnUpdateFood.Text = "Update";
             this.btnUpdateFood.UseVisualStyleBackColor = false;
+            this.btnUpdateFood.Click += new System.EventHandler(this.btnUpdateFood_Click);
             // 
             // btnDeleteFood
             // 
@@ -345,6 +351,7 @@ namespace TeaShopManagement
             this.btnDeleteFood.TabIndex = 1;
             this.btnDeleteFood.Text = "Remove";
             this.btnDeleteFood.UseVisualStyleBackColor = false;
+            this.btnDeleteFood.Click += new System.EventHandler(this.btnDeleteFood_Click);
             // 
             // btnAddFood
             // 
@@ -355,6 +362,7 @@ namespace TeaShopManagement
             this.btnAddFood.TabIndex = 0;
             this.btnAddFood.Text = "Add";
             this.btnAddFood.UseVisualStyleBackColor = false;
+            this.btnAddFood.Click += new System.EventHandler(this.btnAddFood_Click);
             // 
             // panel1
             // 
@@ -366,11 +374,14 @@ namespace TeaShopManagement
             // 
             // dgvFood
             // 
+            this.dgvFood.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvFood.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFood.Location = new System.Drawing.Point(3, 3);
             this.dgvFood.Name = "dgvFood";
+            this.dgvFood.ReadOnly = true;
             this.dgvFood.RowHeadersWidth = 51;
             this.dgvFood.RowTemplate.Height = 29;
+            this.dgvFood.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvFood.Size = new System.Drawing.Size(434, 476);
             this.dgvFood.TabIndex = 0;
             // 
@@ -732,6 +743,8 @@ namespace TeaShopManagement
             // panel9
             // 
             this.panel9.Controls.Add(this.btnShowBill);
+            this.panel9.Controls.Add(this.label11);
+            this.panel9.Controls.Add(this.label5);
             this.panel9.Controls.Add(this.dtpEnd);
             this.panel9.Controls.Add(this.dtpStart);
             this.panel9.Location = new System.Drawing.Point(6, 6);
@@ -742,7 +755,7 @@ namespace TeaShopManagement
             // btnShowBill
             // 
             this.btnShowBill.BackColor = System.Drawing.Color.Tomato;
-            this.btnShowBill.Location = new System.Drawing.Point(376, 3);
+            this.btnShowBill.Location = new System.Drawing.Point(725, 3);
             this.btnShowBill.Name = "btnShowBill";
             this.btnShowBill.Size = new System.Drawing.Size(94, 43);
             this.btnShowBill.TabIndex = 2;
@@ -750,16 +763,34 @@ namespace TeaShopManagement
             this.btnShowBill.UseVisualStyleBackColor = false;
             this.btnShowBill.Click += new System.EventHandler(this.btnShowBill_Click);
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(372, 14);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(27, 20);
+            this.label11.TabIndex = 3;
+            this.label11.Text = "To";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(20, 14);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(44, 20);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "From";
+            // 
             // dtpEnd
             // 
-            this.dtpEnd.Location = new System.Drawing.Point(603, 8);
+            this.dtpEnd.Location = new System.Drawing.Point(425, 8);
             this.dtpEnd.Name = "dtpEnd";
             this.dtpEnd.Size = new System.Drawing.Size(250, 28);
             this.dtpEnd.TabIndex = 1;
             // 
             // dtpStart
             // 
-            this.dtpStart.Location = new System.Drawing.Point(0, 8);
+            this.dtpStart.Location = new System.Drawing.Point(84, 8);
             this.dtpStart.Name = "dtpStart";
             this.dtpStart.Size = new System.Drawing.Size(250, 28);
             this.dtpStart.TabIndex = 0;
@@ -818,6 +849,7 @@ namespace TeaShopManagement
             this.panel12.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvShowBill)).EndInit();
             this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -835,7 +867,7 @@ namespace TeaShopManagement
         private System.Windows.Forms.TabPage tcAccount;
         private System.Windows.Forms.TabPage tcCategory;
         private System.Windows.Forms.Button btnSearchFood;
-        private System.Windows.Forms.Button btnPrevieFodd;
+        private System.Windows.Forms.Button btnLoad;
         private System.Windows.Forms.Button btnUpdateFood;
         private System.Windows.Forms.Button btnDeleteFood;
         private System.Windows.Forms.TextBox txtBSearchFoodName;
@@ -889,5 +921,7 @@ namespace TeaShopManagement
         private System.Windows.Forms.Button btnShowBill;
         private System.Windows.Forms.DateTimePicker dtpEnd;
         private System.Windows.Forms.DateTimePicker dtpStart;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label5;
     }
 }

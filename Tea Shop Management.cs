@@ -14,12 +14,14 @@ using TeaShopManagement.DTO;
 namespace TeaShopManagement
 {
     public partial class Tea_Shop_Management : Form
-    {
-       
+    {    
+        public Account accountInfo { get; set; }
 
-        public Tea_Shop_Management()
+        public Tea_Shop_Management(Account acc)
         {
+            
             InitializeComponent();
+            CheckLoginAcc(acc.RoleID);
             LoadTableList();
             LoadCategory();
         }
@@ -27,6 +29,27 @@ namespace TeaShopManagement
         
 
         #region Methods
+
+        void CheckLoginAcc(int role)
+        {
+            try
+            {
+                if (role != 1)
+                {
+                    adminToolStripMenuItem.Visible = false;
+                }
+                else
+                {
+                    adminToolStripMenuItem.Visible = true;
+                }
+            }
+            catch
+            {
+
+            }
+            
+            
+        }
         void LoadCategory()
         {
             List<Category> list = CategoryDAO.Instance.GetListCategory();
@@ -125,7 +148,7 @@ namespace TeaShopManagement
 
         private void myInformationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AccountInfo f = new AccountInfo();
+            AccountInfo f = new AccountInfo(accountInfo);
             f.ShowDialog();
         }
 
