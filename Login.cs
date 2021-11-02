@@ -32,7 +32,7 @@ namespace TeaShopManagement
 
         private void Login_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to exit?","Exit!",MessageBoxButtons.OKCancel) !=
+            if (MessageBox.Show("Are you sure you want to exit?","Exit!",MessageBoxButtons.OKCancel, MessageBoxIcon.Question) !=
                 System.Windows.Forms.DialogResult.OK)
             {
                 e.Cancel = true;
@@ -56,7 +56,7 @@ namespace TeaShopManagement
             }
             else
             {
-                MessageBox.Show("Wrong username or password!");
+                MessageBox.Show("Wrong username or password!","Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

@@ -197,3 +197,14 @@ go
 select f.name,binfo.count,f.price, f.price*binfo.count as totalprice
 from tblBillInfo as binfo, tblBill as bill, tblFoods as f
 where binfo.idBill = bill.id and binfo.idFood = f.id and bill.status = 'PAID' and bill.id = 43
+
+go
+alter table tblAccount add status nvarchar(30)
+go
+select userName as [User Name], roleId as [Role ID], accountName as [Display Name]
+                from tblAccount where status = 'active'
+go
+
+select roleName from tblRoles 
+go
+update tblAccount set status = 'active' where userName = 'staff2'

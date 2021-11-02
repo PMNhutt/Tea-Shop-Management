@@ -58,17 +58,16 @@ namespace TeaShopManagement
             this.panel21 = new System.Windows.Forms.Panel();
             this.dgvAccount = new System.Windows.Forms.DataGridView();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.panel19 = new System.Windows.Forms.Panel();
+            this.txtDisplayName = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.panel17 = new System.Windows.Forms.Panel();
             this.cbRoles = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.panel18 = new System.Windows.Forms.Panel();
-            this.txtBDisplayName = new System.Windows.Forms.TextBox();
+            this.txtBUserName = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.panel19 = new System.Windows.Forms.Panel();
-            this.txtBAccountName = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.panel20 = new System.Windows.Forms.Panel();
-            this.btnPreviewAcc = new System.Windows.Forms.Button();
             this.btnUpdateAcc = new System.Windows.Forms.Button();
             this.btnRemoveAcc = new System.Windows.Forms.Button();
             this.btnAddAccount = new System.Windows.Forms.Button();
@@ -83,7 +82,6 @@ namespace TeaShopManagement
             this.txtBCategoryID = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.panel15 = new System.Windows.Forms.Panel();
-            this.btnReviewCategory = new System.Windows.Forms.Button();
             this.btnUpdateCategory = new System.Windows.Forms.Button();
             this.btnRemoveCategory = new System.Windows.Forms.Button();
             this.btnAddCategory = new System.Windows.Forms.Button();
@@ -112,9 +110,9 @@ namespace TeaShopManagement
             this.panel21.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).BeginInit();
             this.panel11.SuspendLayout();
+            this.panel19.SuspendLayout();
             this.panel17.SuspendLayout();
             this.panel18.SuspendLayout();
-            this.panel19.SuspendLayout();
             this.panel20.SuspendLayout();
             this.tcCategory.SuspendLayout();
             this.panel16.SuspendLayout();
@@ -408,30 +406,60 @@ namespace TeaShopManagement
             // 
             // dgvAccount
             // 
+            this.dgvAccount.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAccount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAccount.Location = new System.Drawing.Point(3, 3);
             this.dgvAccount.Name = "dgvAccount";
+            this.dgvAccount.ReadOnly = true;
             this.dgvAccount.RowHeadersWidth = 51;
             this.dgvAccount.RowTemplate.Height = 29;
+            this.dgvAccount.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvAccount.Size = new System.Drawing.Size(434, 476);
             this.dgvAccount.TabIndex = 0;
             // 
             // panel11
             // 
+            this.panel11.Controls.Add(this.panel19);
             this.panel11.Controls.Add(this.panel17);
             this.panel11.Controls.Add(this.panel18);
-            this.panel11.Controls.Add(this.panel19);
             this.panel11.Location = new System.Drawing.Point(454, 80);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(403, 482);
             this.panel11.TabIndex = 6;
+            // 
+            // panel19
+            // 
+            this.panel19.BackColor = System.Drawing.Color.Transparent;
+            this.panel19.Controls.Add(this.txtDisplayName);
+            this.panel19.Controls.Add(this.label10);
+            this.panel19.Location = new System.Drawing.Point(3, 62);
+            this.panel19.Name = "panel19";
+            this.panel19.Size = new System.Drawing.Size(399, 54);
+            this.panel19.TabIndex = 4;
+            // 
+            // txtDisplayName
+            // 
+            this.txtDisplayName.Location = new System.Drawing.Point(152, 14);
+            this.txtDisplayName.Name = "txtDisplayName";
+            this.txtDisplayName.Size = new System.Drawing.Size(233, 28);
+            this.txtDisplayName.TabIndex = 1;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label10.Location = new System.Drawing.Point(3, 13);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(153, 29);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Display Name:";
             // 
             // panel17
             // 
             this.panel17.BackColor = System.Drawing.Color.Transparent;
             this.panel17.Controls.Add(this.cbRoles);
             this.panel17.Controls.Add(this.label6);
-            this.panel17.Location = new System.Drawing.Point(3, 123);
+            this.panel17.Location = new System.Drawing.Point(3, 122);
             this.panel17.Name = "panel17";
             this.panel17.Size = new System.Drawing.Size(399, 54);
             this.panel17.TabIndex = 3;
@@ -439,9 +467,9 @@ namespace TeaShopManagement
             // cbRoles
             // 
             this.cbRoles.FormattingEnabled = true;
-            this.cbRoles.Location = new System.Drawing.Point(145, 13);
+            this.cbRoles.Location = new System.Drawing.Point(152, 13);
             this.cbRoles.Name = "cbRoles";
-            this.cbRoles.Size = new System.Drawing.Size(240, 28);
+            this.cbRoles.Size = new System.Drawing.Size(233, 28);
             this.cbRoles.TabIndex = 1;
             // 
             // label6
@@ -457,19 +485,20 @@ namespace TeaShopManagement
             // panel18
             // 
             this.panel18.BackColor = System.Drawing.Color.Transparent;
-            this.panel18.Controls.Add(this.txtBDisplayName);
+            this.panel18.Controls.Add(this.txtBUserName);
             this.panel18.Controls.Add(this.label9);
-            this.panel18.Location = new System.Drawing.Point(3, 63);
+            this.panel18.Location = new System.Drawing.Point(3, 3);
             this.panel18.Name = "panel18";
             this.panel18.Size = new System.Drawing.Size(399, 54);
             this.panel18.TabIndex = 2;
             // 
-            // txtBDisplayName
+            // txtBUserName
             // 
-            this.txtBDisplayName.Location = new System.Drawing.Point(145, 14);
-            this.txtBDisplayName.Name = "txtBDisplayName";
-            this.txtBDisplayName.Size = new System.Drawing.Size(240, 28);
-            this.txtBDisplayName.TabIndex = 1;
+            this.txtBUserName.Location = new System.Drawing.Point(152, 14);
+            this.txtBUserName.Name = "txtBUserName";
+            this.txtBUserName.Size = new System.Drawing.Size(233, 28);
+            this.txtBUserName.TabIndex = 1;
+            this.txtBUserName.TextChanged += new System.EventHandler(this.txtBUserName_TextChanged);
             // 
             // label9
             // 
@@ -481,37 +510,8 @@ namespace TeaShopManagement
             this.label9.TabIndex = 0;
             this.label9.Text = "User Name:";
             // 
-            // panel19
-            // 
-            this.panel19.BackColor = System.Drawing.Color.Transparent;
-            this.panel19.Controls.Add(this.txtBAccountName);
-            this.panel19.Controls.Add(this.label10);
-            this.panel19.Location = new System.Drawing.Point(3, 3);
-            this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(396, 54);
-            this.panel19.TabIndex = 1;
-            // 
-            // txtBAccountName
-            // 
-            this.txtBAccountName.Location = new System.Drawing.Point(145, 14);
-            this.txtBAccountName.Name = "txtBAccountName";
-            this.txtBAccountName.ReadOnly = true;
-            this.txtBAccountName.Size = new System.Drawing.Size(240, 28);
-            this.txtBAccountName.TabIndex = 1;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(3, 13);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(47, 29);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "ID:";
-            // 
             // panel20
             // 
-            this.panel20.Controls.Add(this.btnPreviewAcc);
             this.panel20.Controls.Add(this.btnUpdateAcc);
             this.panel20.Controls.Add(this.btnRemoveAcc);
             this.panel20.Controls.Add(this.btnAddAccount);
@@ -519,16 +519,6 @@ namespace TeaShopManagement
             this.panel20.Name = "panel20";
             this.panel20.Size = new System.Drawing.Size(438, 68);
             this.panel20.TabIndex = 5;
-            // 
-            // btnPreviewAcc
-            // 
-            this.btnPreviewAcc.BackColor = System.Drawing.Color.LightSalmon;
-            this.btnPreviewAcc.Location = new System.Drawing.Point(290, 3);
-            this.btnPreviewAcc.Name = "btnPreviewAcc";
-            this.btnPreviewAcc.Size = new System.Drawing.Size(89, 62);
-            this.btnPreviewAcc.TabIndex = 3;
-            this.btnPreviewAcc.Text = "Preview";
-            this.btnPreviewAcc.UseVisualStyleBackColor = false;
             // 
             // btnUpdateAcc
             // 
@@ -539,6 +529,7 @@ namespace TeaShopManagement
             this.btnUpdateAcc.TabIndex = 2;
             this.btnUpdateAcc.Text = "Update";
             this.btnUpdateAcc.UseVisualStyleBackColor = false;
+            this.btnUpdateAcc.Click += new System.EventHandler(this.btnUpdateAcc_Click);
             // 
             // btnRemoveAcc
             // 
@@ -549,6 +540,7 @@ namespace TeaShopManagement
             this.btnRemoveAcc.TabIndex = 1;
             this.btnRemoveAcc.Text = "Remove";
             this.btnRemoveAcc.UseVisualStyleBackColor = false;
+            this.btnRemoveAcc.Click += new System.EventHandler(this.btnRemoveAcc_Click);
             // 
             // btnAddAccount
             // 
@@ -559,6 +551,7 @@ namespace TeaShopManagement
             this.btnAddAccount.TabIndex = 0;
             this.btnAddAccount.Text = "Add";
             this.btnAddAccount.UseVisualStyleBackColor = false;
+            this.btnAddAccount.Click += new System.EventHandler(this.btnAddAccount_Click);
             // 
             // tcCategory
             // 
@@ -657,7 +650,6 @@ namespace TeaShopManagement
             // 
             // panel15
             // 
-            this.panel15.Controls.Add(this.btnReviewCategory);
             this.panel15.Controls.Add(this.btnUpdateCategory);
             this.panel15.Controls.Add(this.btnRemoveCategory);
             this.panel15.Controls.Add(this.btnAddCategory);
@@ -665,16 +657,6 @@ namespace TeaShopManagement
             this.panel15.Name = "panel15";
             this.panel15.Size = new System.Drawing.Size(438, 68);
             this.panel15.TabIndex = 4;
-            // 
-            // btnReviewCategory
-            // 
-            this.btnReviewCategory.BackColor = System.Drawing.Color.LightSalmon;
-            this.btnReviewCategory.Location = new System.Drawing.Point(290, 3);
-            this.btnReviewCategory.Name = "btnReviewCategory";
-            this.btnReviewCategory.Size = new System.Drawing.Size(89, 62);
-            this.btnReviewCategory.TabIndex = 3;
-            this.btnReviewCategory.Text = "Preview";
-            this.btnReviewCategory.UseVisualStyleBackColor = false;
             // 
             // btnUpdateCategory
             // 
@@ -829,12 +811,12 @@ namespace TeaShopManagement
             this.panel21.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).EndInit();
             this.panel11.ResumeLayout(false);
+            this.panel19.ResumeLayout(false);
+            this.panel19.PerformLayout();
             this.panel17.ResumeLayout(false);
             this.panel17.PerformLayout();
             this.panel18.ResumeLayout(false);
             this.panel18.PerformLayout();
-            this.panel19.ResumeLayout(false);
-            this.panel19.PerformLayout();
             this.panel20.ResumeLayout(false);
             this.tcCategory.ResumeLayout(false);
             this.panel16.ResumeLayout(false);
@@ -893,7 +875,6 @@ namespace TeaShopManagement
         private System.Windows.Forms.TextBox txtBCategoryID;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel15;
-        private System.Windows.Forms.Button btnReviewCategory;
         private System.Windows.Forms.Button btnUpdateCategory;
         private System.Windows.Forms.Button btnRemoveCategory;
         private System.Windows.Forms.Button btnAddCategory;
@@ -904,13 +885,9 @@ namespace TeaShopManagement
         private System.Windows.Forms.ComboBox cbRoles;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel18;
-        private System.Windows.Forms.TextBox txtBDisplayName;
+        private System.Windows.Forms.TextBox txtBUserName;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Panel panel19;
-        private System.Windows.Forms.TextBox txtBAccountName;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel panel20;
-        private System.Windows.Forms.Button btnPreviewAcc;
         private System.Windows.Forms.Button btnUpdateAcc;
         private System.Windows.Forms.Button btnRemoveAcc;
         private System.Windows.Forms.Button btnAddAccount;
@@ -923,5 +900,8 @@ namespace TeaShopManagement
         private System.Windows.Forms.DateTimePicker dtpStart;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Panel panel19;
+        private System.Windows.Forms.TextBox txtDisplayName;
+        private System.Windows.Forms.Label label10;
     }
 }

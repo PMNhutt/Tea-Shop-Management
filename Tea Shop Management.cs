@@ -75,12 +75,15 @@ namespace TeaShopManagement
             foreach (Table item in list)
             {
                 Button btn = new Button() {Width = TableDAO.tableW, Height = TableDAO.tableH };
+                
                 btn.Text = item.Name + Environment.NewLine + item.Status;
                 //set events load data when clicked
                 btn.Click += Btn_Click;
+                btn.DoubleClick += Btn_DoubleClick;
+                
                 //save table to btn
                 btn.Tag = item;
-
+                
 
                 if (item.Status.Equals("Empty")){
                     btn.BackColor = Color.MistyRose;
@@ -92,6 +95,8 @@ namespace TeaShopManagement
                 flowLPanelTable.Controls.Add(btn);
             }
         }
+
+        
 
         void ShowBill(int id)
         {
@@ -119,9 +124,24 @@ namespace TeaShopManagement
             
            
         }
-        
+
+        void ChangeTableStatus (int id)
+        {
+            if (MessageBox.Show($"Change table {id} status?", "Tea Shop Management!", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) ==
+                System.Windows.Forms.DialogResult.OK)
+            {
+                TableDAO.Instance.UpdateTableStatus(id);
+            }
+        }
+
         #endregion
         #region Events
+        private void Btn_DoubleClick(object sender, EventArgs e)
+        {
+            //use tag
+            int tableID = ((sender as Button).Tag as Table).ID;
+            ChangeTableStatus(tableID);
+        }
         private void Btn_Click(object sender, EventArgs e)
         {
             //use tag
@@ -225,7 +245,7 @@ namespace TeaShopManagement
 
             if(idBill == -1)
             {
-                MessageBox.Show("Bill empty!", "Error",MessageBoxButtons.OK);
+                MessageBox.Show("Bill empty!", "Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -242,7 +262,7 @@ namespace TeaShopManagement
             float totalPrice = float.Parse(txBTotalPrice.Text, NumberStyles.Currency, new CultureInfo("vi-VN"));
             if (idBill != -1)
             {
-                if(MessageBox.Show("Check out bill for: " + table.Name, "Message!",MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+                if(MessageBox.Show("Check out bill for: " + table.Name, "Message!",MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.OK)
                 {
                     TableDAO.Instance.UpdateTableStatus(table.ID);
                     BillDAO.Instance.CheckOutBill(idBill, (float)totalPrice);

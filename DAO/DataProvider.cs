@@ -10,11 +10,9 @@ namespace TeaShopManagement.DAO
 {
     public class DataProvider
     {
-        //singleton
-        //để chỉ có 1 cái dataprovider trong app thôi, tránh xuất hiện nhiều dataprovider quá mỗi khi
-        //kết nối csdl
+        
 
-        //xài thì : DataProvider.Instance.Ex...
+        
         private static DataProvider instance;
 
         public static DataProvider Instance 
@@ -136,7 +134,7 @@ namespace TeaShopManagement.DAO
         //login bruh...??????
         public DataTable LoginExecuteQuery(string username, string password,object[] parameter = null)
         {
-            string query = "select * from tblAccount where userName =@username and password =@password";
+            string query = "select * from tblAccount where userName =@username and password =@password and status='active'";
             DataTable data = new DataTable();
             //using: khi kết thúc khối lệnh sẽ tự giải phóng bộ nhớ
             using (SqlConnection conn = new SqlConnection(connStr))

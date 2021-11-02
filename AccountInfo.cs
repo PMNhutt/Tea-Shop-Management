@@ -43,17 +43,17 @@ namespace TeaShopManagement
             // update Password -> enter oldPass, then new pass, then re enter new pass
             if (!rePass.Equals(newPass))
             {
-                MessageBox.Show("Confirm pass word failed!");
+                MessageBox.Show("Confirm pass word failed!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
                 if (AccountDAO.Instance.UpdateAccountInfo(userName, displayName, passWord, newPass))
                 {
-                    MessageBox.Show("Update Sucessfully");
+                    MessageBox.Show("Update Sucessfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show("Wrong pass word!");
+                    MessageBox.Show("Wrong pass word!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
