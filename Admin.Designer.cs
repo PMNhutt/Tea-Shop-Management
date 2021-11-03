@@ -290,6 +290,7 @@ namespace TeaShopManagement
             // 
             // txtBIdFood
             // 
+            this.txtBIdFood.Enabled = false;
             this.txtBIdFood.Location = new System.Drawing.Point(126, 14);
             this.txtBIdFood.Name = "txtBIdFood";
             this.txtBIdFood.ReadOnly = true;
@@ -576,11 +577,14 @@ namespace TeaShopManagement
             // 
             // dgvCategory
             // 
+            this.dgvCategory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCategory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCategory.Location = new System.Drawing.Point(3, 3);
             this.dgvCategory.Name = "dgvCategory";
+            this.dgvCategory.ReadOnly = true;
             this.dgvCategory.RowHeadersWidth = 51;
             this.dgvCategory.RowTemplate.Height = 29;
+            this.dgvCategory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCategory.Size = new System.Drawing.Size(434, 476);
             this.dgvCategory.TabIndex = 0;
             // 
@@ -632,6 +636,7 @@ namespace TeaShopManagement
             // 
             // txtBCategoryID
             // 
+            this.txtBCategoryID.Enabled = false;
             this.txtBCategoryID.Location = new System.Drawing.Point(126, 14);
             this.txtBCategoryID.Name = "txtBCategoryID";
             this.txtBCategoryID.ReadOnly = true;
@@ -667,6 +672,7 @@ namespace TeaShopManagement
             this.btnUpdateCategory.TabIndex = 2;
             this.btnUpdateCategory.Text = "Update";
             this.btnUpdateCategory.UseVisualStyleBackColor = false;
+            this.btnUpdateCategory.Click += new System.EventHandler(this.btnUpdateCategory_Click);
             // 
             // btnRemoveCategory
             // 
@@ -677,6 +683,7 @@ namespace TeaShopManagement
             this.btnRemoveCategory.TabIndex = 1;
             this.btnRemoveCategory.Text = "Remove";
             this.btnRemoveCategory.UseVisualStyleBackColor = false;
+            this.btnRemoveCategory.Click += new System.EventHandler(this.btnRemoveCategory_Click);
             // 
             // btnAddCategory
             // 
@@ -687,6 +694,7 @@ namespace TeaShopManagement
             this.btnAddCategory.TabIndex = 0;
             this.btnAddCategory.Text = "Add";
             this.btnAddCategory.UseVisualStyleBackColor = false;
+            this.btnAddCategory.Click += new System.EventHandler(this.btnAddCategory_Click);
             // 
             // tcStatistical
             // 

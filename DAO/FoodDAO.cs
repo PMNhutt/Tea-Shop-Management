@@ -81,7 +81,7 @@ namespace TeaShopManagement.DAO
 
         public int GetFoodByName (string name)
         {
-            string query = string.Format("select name from tblFoods where status = 'active' and name = '{0}'",name);
+            string query = string.Format("select name from tblFoods where name = '{0}'",name);
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
             if (data.Rows.Count > 0)
@@ -95,7 +95,7 @@ namespace TeaShopManagement.DAO
         {
             List<Food> list = new List<Food>();
             //search gan dung name
-            string query = string.Format("select * from tblFoods where name like '%{0}%'", name);
+            string query = string.Format("select * from tblFoods where status = 'active' and name like '%{0}%'", name);
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
             foreach (DataRow item in data.Rows)
@@ -105,6 +105,25 @@ namespace TeaShopManagement.DAO
             }
 
             return list;
+        }
+
+        public Food CheckFoodStatusByName (string name)
+        {
+            string query = string.Format("select * from tblFoods where status = 'passive' and name = '{0}'", name);
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
+            foreach (DataRow item in data.Rows)
+            {
+                Food f = new Food(item);
+                return f;
+            }
+            return null;
+        }
+
+        public void ChangeFoodStatus(string name)
+        {
+            string query = string.Format("update tblFoods set status = 'active' where name = '{0}'", name);
+            DataProvider.Instance.ExecuteQuery(query);
         }
     }
 }

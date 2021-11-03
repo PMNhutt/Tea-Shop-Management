@@ -208,3 +208,5 @@ go
 select roleName from tblRoles 
 go
 update tblAccount set status = 'active' where userName = 'staff2'
+go
+select * from tblFoods where status = 'passive' and name = 'Su Su Cake'

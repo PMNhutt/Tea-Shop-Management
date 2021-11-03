@@ -39,6 +39,7 @@ namespace TeaShopManagement
             LoadCategoryListToComboBox(cbFoodCategory);
             LoadListAcc();
             LoadRoleAccountToComboBox(cbRoles);
+            LoadListCategory();
         }
 
         void SetDateTimePicker()
@@ -109,6 +110,23 @@ namespace TeaShopManagement
             
             dgvAccount.DataSource = null;
             dgvAccount.DataSource = source;
+        }
+
+        void LoadListCategory()
+        {
+            var list = CategoryDAO.Instance.GetListCategory();
+
+            source = new BindingSource();
+            source.DataSource = list;
+
+            txtBCategoryName.DataBindings.Clear();
+            txtBCategoryID.DataBindings.Clear();
+
+            txtBCategoryID.DataBindings.Add("Text", source, "id", true, DataSourceUpdateMode.Never);
+            txtBCategoryName.DataBindings.Add("Text", source, "name", true, DataSourceUpdateMode.Never);
+
+            dgvCategory.DataSource = null;
+            dgvCategory.DataSource = source;
         }
         #endregion
 
@@ -217,7 +235,20 @@ namespace TeaShopManagement
                 int checkExistFood = FoodDAO.Instance.GetFoodByName(name);
                 if (checkExistFood > 0)
                 {
-                    MessageBox.Show("This food is already exist!", "Admin", MessageBoxButtons.OK ,MessageBoxIcon.Error);
+                    if (FoodDAO.Instance.CheckFoodStatusByName(name) != null)
+                    {
+                        if (MessageBox.Show($"'{name}' used to be removed. Add again?", "Admin", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
+                        == System.Windows.Forms.DialogResult.OK)
+                        {
+                            FoodDAO.Instance.ChangeFoodStatus(name);
+                            LoadListFood();
+                        }
+                    }                  
+                    else
+                    {
+                        MessageBox.Show("This food is already existed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    
                 }
                 else
                 {
@@ -338,7 +369,7 @@ namespace TeaShopManagement
                 }
                 else
                 {
-                    MessageBox.Show("This account is exist!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("This account is already existed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 
             }
@@ -393,6 +424,78 @@ namespace TeaShopManagement
                 MessageBox.Show("Update failed... [User Name] must be the same!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void btnAddCategory_Click(object sender, EventArgs e)
+        {
+            string categoryName = txtBCategoryName.Text;
+            if (CategoryDAO.Instance.GetCategoryByName(categoryName) != null)
+            {
+                if (CategoryDAO.Instance.CheckExistCategory(categoryName) != null )
+                {
+                    if (MessageBox.Show($"Category '{categoryName}' used to be removed. Add again?","Admin", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) ==
+                        System.Windows.Forms.DialogResult.OK)
+                    {
+                        CategoryDAO.Instance.ChangeCategoryStatus(categoryName);
+                        LoadListCategory();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("This category is already existed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
+            }
+            else
+            {
+                if (CategoryDAO.Instance.AddCategory(categoryName))
+                {
+                    MessageBox.Show("Add successfully", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadListCategory();
+                }
+                else
+                {
+                    MessageBox.Show("Add failed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            
+        }
+
+        private void btnRemoveCategory_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Remove this?", "Admin", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) ==
+                System.Windows.Forms.DialogResult.OK)
+            {
+                string categoryName = txtBCategoryName.Text;
+
+                if (CategoryDAO.Instance.RemoveCategory(categoryName))
+                {
+                    MessageBox.Show("Remove successfully", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadListCategory();
+                }
+                else
+                {
+                    MessageBox.Show("Remove failed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+
+        }
+        private void btnUpdateCategory_Click(object sender, EventArgs e)
+        {
+            string name = txtBCategoryName.Text;
+            int id = int.Parse(txtBCategoryID.Text);
+
+            if (CategoryDAO.Instance.UpdateCategory(name, id))
+            {
+                MessageBox.Show("Update successfully", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadListCategory();
+            }
+            else
+            {
+                MessageBox.Show("Update failed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         #endregion
 
 

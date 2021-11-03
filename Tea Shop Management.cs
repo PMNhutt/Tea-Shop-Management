@@ -74,8 +74,8 @@ namespace TeaShopManagement
 
             foreach (Table item in list)
             {
-                Button btn = new Button() {Width = TableDAO.tableW, Height = TableDAO.tableH };
-                
+             //   Button btn = new Button() {Width = TableDAO.tableW, Height = TableDAO.tableH };
+                TableButton btn = new TableButton() { Width = TableDAO.tableW, Height = TableDAO.tableH };
                 btn.Text = item.Name + Environment.NewLine + item.Status;
                 //set events load data when clicked
                 btn.Click += Btn_Click;
@@ -127,7 +127,7 @@ namespace TeaShopManagement
 
         void ChangeTableStatus (int id)
         {
-            if (MessageBox.Show($"Change table {id} status?", "Tea Shop Management!", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) ==
+            if (MessageBox.Show($"Change table {id - 1} status?", "Tea Shop Management!", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) ==
                 System.Windows.Forms.DialogResult.OK)
             {
                 TableDAO.Instance.UpdateTableStatus(id);
@@ -141,6 +141,7 @@ namespace TeaShopManagement
             //use tag
             int tableID = ((sender as Button).Tag as Table).ID;
             ChangeTableStatus(tableID);
+            LoadTableList();
         }
         private void Btn_Click(object sender, EventArgs e)
         {
