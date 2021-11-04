@@ -213,7 +213,7 @@ namespace TeaShopManagement
 
             int idBill = BillDAO.Instance.Get_UnPaid_Bill_ID_By_TableID(table.ID);
             //lấy idFood từ combobox
-            int idFood = (cbTeavFood.SelectedItem as Food).ID;
+            int idFood = FoodDAO.Instance.GetIdFoodByName(cbTeavFood.Text);
             //lấy value từ numbericUpDown
             int count = (int)numericUpDown1.Value;
 
