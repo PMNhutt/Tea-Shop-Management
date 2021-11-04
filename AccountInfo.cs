@@ -60,7 +60,7 @@ namespace TeaShopManagement
 
         private void btnExitInfo_Click(object sender, EventArgs e)
         {
-
+            
             this.Close();
         }
     }

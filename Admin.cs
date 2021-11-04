@@ -134,7 +134,15 @@ namespace TeaShopManagement
 
         private void btnShowBill_Click(object sender, EventArgs e)
         {
-            LoadListBill(dtpStart.Value, dtpEnd.Value);
+            if (dtpEnd.Value < dtpStart.Value)
+            {
+                MessageBox.Show("End Date can't be lower than Start Date!","Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                LoadListBill(dtpStart.Value, dtpEnd.Value);
+            }
+            
         }
 
         private void dgvShowBill_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

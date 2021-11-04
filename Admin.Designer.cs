@@ -376,6 +376,7 @@ namespace TeaShopManagement
             this.dgvFood.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvFood.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFood.Location = new System.Drawing.Point(3, 3);
+            this.dgvFood.MultiSelect = false;
             this.dgvFood.Name = "dgvFood";
             this.dgvFood.ReadOnly = true;
             this.dgvFood.RowHeadersWidth = 51;
@@ -410,6 +411,7 @@ namespace TeaShopManagement
             this.dgvAccount.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAccount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAccount.Location = new System.Drawing.Point(3, 3);
+            this.dgvAccount.MultiSelect = false;
             this.dgvAccount.Name = "dgvAccount";
             this.dgvAccount.ReadOnly = true;
             this.dgvAccount.RowHeadersWidth = 51;
@@ -580,6 +582,7 @@ namespace TeaShopManagement
             this.dgvCategory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCategory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCategory.Location = new System.Drawing.Point(3, 3);
+            this.dgvCategory.MultiSelect = false;
             this.dgvCategory.Name = "dgvCategory";
             this.dgvCategory.ReadOnly = true;
             this.dgvCategory.RowHeadersWidth = 51;
@@ -721,6 +724,7 @@ namespace TeaShopManagement
             this.dgvShowBill.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvShowBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvShowBill.Location = new System.Drawing.Point(3, 3);
+            this.dgvShowBill.MultiSelect = false;
             this.dgvShowBill.Name = "dgvShowBill";
             this.dgvShowBill.ReadOnly = true;
             this.dgvShowBill.RowHeadersWidth = 51;

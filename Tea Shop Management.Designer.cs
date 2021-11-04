@@ -52,6 +52,7 @@ namespace TeaShopManagement
             this.txBTotalPrice = new System.Windows.Forms.TextBox();
             this.btnPay = new System.Windows.Forms.Button();
             this.flowLPanelTable = new System.Windows.Forms.FlowLayoutPanel();
+            this.lbWelcome = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -134,7 +135,7 @@ namespace TeaShopManagement
             // columnHeader1
             // 
             this.columnHeader1.Text = "Name";
-            this.columnHeader1.Width = 300;
+            this.columnHeader1.Width = 340;
             // 
             // columnHeader2
             // 
@@ -284,8 +285,19 @@ namespace TeaShopManagement
             this.flowLPanelTable.AutoScroll = true;
             this.flowLPanelTable.Location = new System.Drawing.Point(14, 43);
             this.flowLPanelTable.Name = "flowLPanelTable";
-            this.flowLPanelTable.Size = new System.Drawing.Size(562, 567);
+            this.flowLPanelTable.Size = new System.Drawing.Size(562, 540);
             this.flowLPanelTable.TabIndex = 6;
+            // 
+            // lbWelcome
+            // 
+            this.lbWelcome.AutoSize = true;
+            this.lbWelcome.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbWelcome.Location = new System.Drawing.Point(14, 590);
+            this.lbWelcome.Name = "lbWelcome";
+            this.lbWelcome.Size = new System.Drawing.Size(74, 21);
+            this.lbWelcome.TabIndex = 0;
+            this.lbWelcome.Text = "Welcome";
+            this.lbWelcome.Click += new System.EventHandler(this.label2_Click);
             // 
             // Tea_Shop_Management
             // 
@@ -293,6 +305,7 @@ namespace TeaShopManagement
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MistyRose;
             this.ClientSize = new System.Drawing.Size(1159, 622);
+            this.Controls.Add(this.lbWelcome);
             this.Controls.Add(this.flowLPanelTable);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
@@ -344,5 +357,6 @@ namespace TeaShopManagement
         private System.Windows.Forms.TextBox txBTotalPrice;
         private System.Windows.Forms.Button btnDeleteFood;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lbWelcome;
     }
 }

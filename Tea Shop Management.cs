@@ -16,7 +16,7 @@ namespace TeaShopManagement
     public partial class Tea_Shop_Management : Form
     {    
         public Account accountInfo { get; set; }
-
+        
         public Tea_Shop_Management(Account acc)
         {
             
@@ -24,12 +24,17 @@ namespace TeaShopManagement
             CheckLoginAcc(acc.RoleID);
             LoadTableList();
             LoadCategory();
+            LoadWelcomeUser(acc.AccountName);
         }
 
         
 
         #region Methods
 
+        void LoadWelcomeUser(string name)
+        {
+            lbWelcome.Text = "Welcome " + "'"+name+"'";
+        }
         void CheckLoginAcc(int role)
         {
             try
@@ -127,7 +132,7 @@ namespace TeaShopManagement
 
         void ChangeTableStatus (int id)
         {
-            if (MessageBox.Show($"Change table {id - 1} status?", "Tea Shop Management!", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) ==
+            if (MessageBox.Show($"Change table {id - 1} status to 'Empty'?", "Tea Shop Management", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) ==
                 System.Windows.Forms.DialogResult.OK)
             {
                 TableDAO.Instance.UpdateTableStatus(id);
@@ -263,7 +268,7 @@ namespace TeaShopManagement
             float totalPrice = float.Parse(txBTotalPrice.Text, NumberStyles.Currency, new CultureInfo("vi-VN"));
             if (idBill != -1)
             {
-                if(MessageBox.Show("Check out bill for: " + table.Name, "Message!",MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.OK)
+                if(MessageBox.Show("Check out bill for: " + table.Name, "Tea Shop Management",MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.OK)
                 {
                     TableDAO.Instance.UpdateTableStatus(table.ID);
                     BillDAO.Instance.CheckOutBill(idBill, (float)totalPrice);
@@ -279,6 +284,15 @@ namespace TeaShopManagement
 
         }
 
+        private void flowLPanelTable_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
         #endregion
 
 
