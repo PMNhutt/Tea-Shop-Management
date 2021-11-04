@@ -122,15 +122,18 @@ namespace TeaShopManagement
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
+            this.listBill.FullRowSelect = true;
             this.listBill.GridLines = true;
             this.listBill.HideSelection = false;
             this.listBill.Location = new System.Drawing.Point(3, 3);
+            this.listBill.MultiSelect = false;
             this.listBill.Name = "listBill";
             this.listBill.Size = new System.Drawing.Size(555, 374);
             this.listBill.TabIndex = 0;
             this.listBill.UseCompatibleStateImageBehavior = false;
             this.listBill.View = System.Windows.Forms.View.Details;
             this.listBill.SelectedIndexChanged += new System.EventHandler(this.listBill_SelectedIndexChanged);
+            this.listBill.Click += new System.EventHandler(this.listBill_Click);
             // 
             // columnHeader1
             // 

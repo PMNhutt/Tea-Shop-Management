@@ -125,5 +125,18 @@ namespace TeaShopManagement.DAO
             string query = string.Format("update tblFoods set status = 'active' where name = '{0}'", name);
             DataProvider.Instance.ExecuteQuery(query);
         }
+
+        public int GetIdFoodByName (string name)
+        {
+            try
+            {
+                string query = string.Format("select id from tblFoods where name = '{0}'", name);
+                return (int)DataProvider.Instance.ExecuteScalar(query);
+            }
+            catch
+            {
+                return 1;
+            }
+        }
     }
 }
