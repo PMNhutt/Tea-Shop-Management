@@ -235,6 +235,8 @@ namespace TeaShopManagement
             // 
             // cbFoodCategory
             // 
+            this.cbFoodCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbFoodCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbFoodCategory.FormattingEnabled = true;
             this.cbFoodCategory.Location = new System.Drawing.Point(126, 13);
             this.cbFoodCategory.Name = "cbFoodCategory";
@@ -469,6 +471,8 @@ namespace TeaShopManagement
             // 
             // cbRoles
             // 
+            this.cbRoles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbRoles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbRoles.FormattingEnabled = true;
             this.cbRoles.Location = new System.Drawing.Point(152, 13);
             this.cbRoles.Name = "cbRoles";

@@ -210,28 +210,35 @@ namespace TeaShopManagement
         {
             //lấy bàn dựa trên tag của listBIll đang chọn
             Table table = listBill.Tag as Table;
-
-            int idBill = BillDAO.Instance.Get_UnPaid_Bill_ID_By_TableID(table.ID);
-            //lấy idFood từ combobox
-            int idFood = FoodDAO.Instance.GetIdFoodByName(cbTeavFood.Text);
-            //lấy value từ numbericUpDown
-            int count = (int)numericUpDown1.Value;
-
-            //nếu bàn đó chưa có bill thì new bill + bill info
-            if (idBill == -1)
+            if (table == null)
             {
-                BillDAO.Instance.InsertBill(table.ID);
-                BillInfoDAO.Instance.InsertBillInfo(BillDAO.Instance.GetMAxIDBill(), idFood, count);
+                MessageBox.Show("No table was chosen!", "Tea Shop Management", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            //bàn đó đã có bill rồi: + bill info (alter sql)
             else
             {
-                BillInfoDAO.Instance.InsertBillInfo(idBill, idFood, count);
+                int idBill = BillDAO.Instance.Get_UnPaid_Bill_ID_By_TableID(table.ID);
+                //lấy idFood từ combobox
+                int idFood = FoodDAO.Instance.GetIdFoodByName(cbTeavFood.Text);
+                //lấy value từ numbericUpDown
+                int count = (int)numericUpDown1.Value;
+
+                //nếu bàn đó chưa có bill thì new bill + bill info
+                if (idBill == -1)
+                {
+                    BillDAO.Instance.InsertBill(table.ID);
+                    BillInfoDAO.Instance.InsertBillInfo(BillDAO.Instance.GetMAxIDBill(), idFood, count);
+                }
+                //bàn đó đã có bill rồi: + bill info (alter sql)
+                else
+                {
+                    BillInfoDAO.Instance.InsertBillInfo(idBill, idFood, count);
+                }
+                TableDAO.Instance.UpdateTableStatusToBusy(table.ID);
+                //load lại dữ liệu sau khi add bill này nọ
+                ShowBill(table.ID);
+                LoadTableList();
             }
-            TableDAO.Instance.UpdateTableStatusToBusy(table.ID);
-            //load lại dữ liệu sau khi add bill này nọ
-            ShowBill(table.ID);
-            LoadTableList();
+            
         }
 
         private void cbTeavFood_SelectedIndexChanged(object sender, EventArgs e)
@@ -295,8 +302,14 @@ namespace TeaShopManagement
         }
         private void listBill_Click(object sender, EventArgs e)
         {
-            cbTeavFood.Text= listBill.SelectedItems[0].SubItems[0].Text;
+            cbTeavFood.Text = listBill.SelectedItems[0].SubItems[0].Text;         
         }
+
+        private void cbTeavFood_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
         #endregion
 
 

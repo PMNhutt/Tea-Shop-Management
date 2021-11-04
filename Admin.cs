@@ -137,6 +137,7 @@ namespace TeaShopManagement
             if (dtpEnd.Value < dtpStart.Value)
             {
                 MessageBox.Show("End Date can't be lower than Start Date!","Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                dtpEnd.Value = dtpStart.Value.AddMonths(1).AddDays(-1);
             }
             else
             {

@@ -188,6 +188,7 @@ namespace TeaShopManagement
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.ReadOnly = true;
             this.numericUpDown1.Size = new System.Drawing.Size(53, 28);
             this.numericUpDown1.TabIndex = 3;
             this.numericUpDown1.Value = new decimal(new int[] {
@@ -211,15 +212,19 @@ namespace TeaShopManagement
             // 
             // cbTeavFood
             // 
+            this.cbTeavFood.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbTeavFood.FormattingEnabled = true;
             this.cbTeavFood.Location = new System.Drawing.Point(3, 37);
             this.cbTeavFood.Name = "cbTeavFood";
             this.cbTeavFood.Size = new System.Drawing.Size(273, 28);
             this.cbTeavFood.TabIndex = 1;
             this.cbTeavFood.SelectedIndexChanged += new System.EventHandler(this.cbTeavFood_SelectedIndexChanged);
+            this.cbTeavFood.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbTeavFood_KeyPress);
             // 
             // cbCategory
             // 
+            this.cbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbCategory.FormattingEnabled = true;
             this.cbCategory.Location = new System.Drawing.Point(3, 3);
             this.cbCategory.Name = "cbCategory";
