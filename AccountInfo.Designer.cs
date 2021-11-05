@@ -108,6 +108,7 @@ namespace TeaShopManagement
             this.txtBRePass.Size = new System.Drawing.Size(281, 28);
             this.txtBRePass.TabIndex = 1;
             this.txtBRePass.UseSystemPasswordChar = true;
+            this.txtBRePass.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBRePass_KeyPress);
             // 
             // label5
             // 
@@ -136,6 +137,7 @@ namespace TeaShopManagement
             this.txtBNewPass.Size = new System.Drawing.Size(281, 28);
             this.txtBNewPass.TabIndex = 1;
             this.txtBNewPass.UseSystemPasswordChar = true;
+            this.txtBNewPass.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBNewPass_KeyPress);
             // 
             // label4
             // 

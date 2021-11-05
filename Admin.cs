@@ -235,43 +235,51 @@ namespace TeaShopManagement
             float price = (float)numUpDFoodPrice.Value;
 
             int checkTableStatus = TableDAO.Instance.CheckOccupiedTable();
-            if(checkTableStatus > 0)
+            try
             {
-                MessageBox.Show("Can't perform while customer is in the shop!!!","Admin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
-            {
-                int checkExistFood = FoodDAO.Instance.GetFoodByName(name);
-                if (checkExistFood > 0)
+                if (checkTableStatus > 0)
                 {
-                    if (FoodDAO.Instance.CheckFoodStatusByName(name) != null)
-                    {
-                        if (MessageBox.Show($"'{name}' used to be removed. Add again?", "Admin", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
-                        == System.Windows.Forms.DialogResult.OK)
-                        {
-                            FoodDAO.Instance.ChangeFoodStatus(name);
-                            LoadListFood();
-                        }
-                    }                  
-                    else
-                    {
-                        MessageBox.Show("This food is already existed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    
+                    MessageBox.Show("Can't perform while customer is in the shop!!!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
-                    if (FoodDAO.Instance.AddFood(name, idCategory, price))
+                    int checkExistFood = FoodDAO.Instance.GetFoodByName(name);
+                    if (checkExistFood > 0)
                     {
-                        MessageBox.Show("Add successfully", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadListFood();
+                        if (FoodDAO.Instance.CheckFoodStatusByName(name) != null)
+                        {
+                            if (MessageBox.Show($"'{name}' used to be removed. Add again?", "Admin", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
+                            == System.Windows.Forms.DialogResult.OK)
+                            {
+                                FoodDAO.Instance.ChangeFoodStatus(name);
+                                LoadListFood();
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("This food is already existed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+
                     }
                     else
                     {
-                        MessageBox.Show("Add failed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        if (FoodDAO.Instance.AddFood(name, idCategory, price))
+                        {
+                            MessageBox.Show("Add successfully", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            LoadListFood();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Add failed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
             }
+            catch
+            {
+                MessageBox.Show("Add failed! Try Product name + '' + ...","Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
                        
         }
 
@@ -282,23 +290,31 @@ namespace TeaShopManagement
             float price = (float)numUpDFoodPrice.Value;
             int idFood = int.Parse(txtBIdFood.Text);
 
-            int checkTableStatus = TableDAO.Instance.CheckOccupiedTable();
-            if (checkTableStatus > 0)
+            try
             {
-                MessageBox.Show("Can't perform while customer is in the shop!!!","Admin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
-            {
-                if (FoodDAO.Instance.UpdateFood(idFood, name, idCategory, price))
+                int checkTableStatus = TableDAO.Instance.CheckOccupiedTable();
+                if (checkTableStatus > 0)
                 {
-                    MessageBox.Show("Update successfully", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadListFood();
+                    MessageBox.Show("Can't perform while customer is in the shop!!!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
-                    MessageBox.Show("Update failed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (FoodDAO.Instance.UpdateFood(idFood, name, idCategory, price))
+                    {
+                        MessageBox.Show("Update successfully", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadListFood();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Update failed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-            }          
+            }
+            catch
+            {
+                MessageBox.Show("Update failed! Try Product name + '' + ...", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+                      
         }
         private void btnDeleteFood_Click(object sender, EventArgs e)
         {
@@ -356,44 +372,51 @@ namespace TeaShopManagement
 
         private void btnAddAccount_Click(object sender, EventArgs e)
         {
-            
-            string accountName = txtBUserName.Text;
-            string displayName = txtDisplayName.Text;
-            int roleId = (cbRoles.SelectedItem as Role).RoleId;
+            try
+            {
+                string accountName = txtBUserName.Text;
+                string displayName = txtDisplayName.Text;
+                int roleId = (cbRoles.SelectedItem as Role).RoleId;
 
-            Account checkExistAcc = AccountDAO.Instance.GetAccByUserName(accountName);
-            if (checkExistAcc != null)
-            {
-                //check if this acc is used to work in our shop (status = 'passive')
-                if (AccountDAO.Instance.CheckAccStatusByUserName(accountName) != null)
+                Account checkExistAcc = AccountDAO.Instance.GetAccByUserName(accountName);
+                if (checkExistAcc != null)
                 {
-                    if (MessageBox.Show($"Account (User Name: {accountName}, Display Name: {displayName}) " +
-                        $"used to work here. Recruit this one again?", "Admin", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) ==
-                        System.Windows.Forms.DialogResult.OK)
+                    //check if this acc is used to work in our shop (status = 'passive')
+                    if (AccountDAO.Instance.CheckAccStatusByUserName(accountName) != null)
                     {
-                        AccountDAO.Instance.ChangeAccStatus(accountName);
+                        if (MessageBox.Show($"Account (User Name: {accountName}, Display Name: {displayName}) " +
+                            $"used to work here. Recruit this one again?", "Admin", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) ==
+                            System.Windows.Forms.DialogResult.OK)
+                        {
+                            AccountDAO.Instance.ChangeAccStatus(accountName);
+                            LoadListAcc();
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("This account is already existed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                }
+                else
+                {
+                    if (AccountDAO.Instance.AddAccount(accountName, roleId, displayName, "123"))
+                    {
+                        MessageBox.Show("Add successfully with default password = 123", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadListAcc();
-                    }                   
-                   
+                    }
+                    else
+                    {
+                        MessageBox.Show("Add failed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("This account is already existed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                
             }
-            else
+            catch
             {
-                if (AccountDAO.Instance.AddAccount(accountName, roleId, displayName, "123"))
-                {
-                    MessageBox.Show("Add successfully with default password = 123", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadListAcc();
-                }
-                else
-                {
-                    MessageBox.Show("Add failed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Add failed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
             
         }
 
@@ -419,53 +442,69 @@ namespace TeaShopManagement
 
         private void btnUpdateAcc_Click(object sender, EventArgs e)
         {
-            string accountName = txtBUserName.Text;
-            string displayName = txtDisplayName.Text;
-            int roleId = (cbRoles.SelectedItem as Role).RoleId;
+            try
+            {
+                string accountName = txtBUserName.Text;
+                string displayName = txtDisplayName.Text;
+                int roleId = (cbRoles.SelectedItem as Role).RoleId;
 
-            if (AccountDAO.Instance.UpdateAccount(accountName, displayName, roleId))
-            {
-                MessageBox.Show("Update successfully", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadListAcc();
+                if (AccountDAO.Instance.UpdateAccount(accountName, displayName, roleId))
+                {
+                    MessageBox.Show("Update successfully", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadListAcc();
+                }
+                else
+                {
+                    MessageBox.Show("Update failed... [User Name] must be the same!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+            catch
             {
-                MessageBox.Show("Update failed... [User Name] must be the same!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Update failed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
         }
 
         private void btnAddCategory_Click(object sender, EventArgs e)
         {
-            string categoryName = txtBCategoryName.Text;
-            if (CategoryDAO.Instance.GetCategoryByName(categoryName) != null)
+            try
             {
-                if (CategoryDAO.Instance.CheckExistCategory(categoryName) != null )
+                string categoryName = txtBCategoryName.Text;
+                if (CategoryDAO.Instance.GetCategoryByName(categoryName) != null)
                 {
-                    if (MessageBox.Show($"Category '{categoryName}' used to be removed. Add again?","Admin", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) ==
-                        System.Windows.Forms.DialogResult.OK)
+                    if (CategoryDAO.Instance.CheckExistCategory(categoryName) != null)
                     {
-                        CategoryDAO.Instance.ChangeCategoryStatus(categoryName);
+                        if (MessageBox.Show($"Category '{categoryName}' used to be removed. Add again?", "Admin", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) ==
+                            System.Windows.Forms.DialogResult.OK)
+                        {
+                            CategoryDAO.Instance.ChangeCategoryStatus(categoryName);
+                            LoadListCategory();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("This category is already existed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                }
+                else
+                {
+                    if (CategoryDAO.Instance.AddCategory(categoryName))
+                    {
+                        MessageBox.Show("Add successfully", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadListCategory();
                     }
+                    else
+                    {
+                        MessageBox.Show("Add failed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("This category is already existed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                
             }
-            else
+            catch
             {
-                if (CategoryDAO.Instance.AddCategory(categoryName))
-                {
-                    MessageBox.Show("Add successfully", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadListCategory();
-                }
-                else
-                {
-                    MessageBox.Show("Add failed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Add failed! Try Category name + '' + ...", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
             
         }
 
@@ -491,18 +530,26 @@ namespace TeaShopManagement
         }
         private void btnUpdateCategory_Click(object sender, EventArgs e)
         {
-            string name = txtBCategoryName.Text;
-            int id = int.Parse(txtBCategoryID.Text);
+            try
+            {
+                string name = txtBCategoryName.Text;
+                int id = int.Parse(txtBCategoryID.Text);
 
-            if (CategoryDAO.Instance.UpdateCategory(name, id))
-            {
-                MessageBox.Show("Update successfully", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadListCategory();
+                if (CategoryDAO.Instance.UpdateCategory(name, id))
+                {
+                    MessageBox.Show("Update successfully", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadListCategory();
+                }
+                else
+                {
+                    MessageBox.Show("Update failed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+            catch
             {
-                MessageBox.Show("Update failed!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Update failed! Try Category name + '' + ...", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
         }
 
         #endregion

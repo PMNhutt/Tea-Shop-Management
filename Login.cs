@@ -41,23 +41,31 @@ namespace TeaShopManagement
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string username = txtBoxUserName.Text;
-            string password = txtBoxPass.Text;
-            if (CheckLogin(username, password) == true)
+            try
             {
-                Account login = AccountDAO.Instance.GetAccByUserName(username);
-                Tea_Shop_Management form = new Tea_Shop_Management(login)
+                string username = txtBoxUserName.Text;
+                string password = txtBoxPass.Text;
+                if (CheckLogin(username, password) == true)
                 {
-                    accountInfo = login
-                };
-                this.Hide();
-                form.ShowDialog();
-                this.Show();
+                    Account login = AccountDAO.Instance.GetAccByUserName(username);
+                    Tea_Shop_Management form = new Tea_Shop_Management(login)
+                    {
+                        accountInfo = login
+                    };
+                    this.Hide();
+                    form.ShowDialog();
+                    this.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Wrong username or password!", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+            catch
             {
-                MessageBox.Show("Wrong username or password!","Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Wrong username or password!", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
         }
 
         bool CheckLogin(string username, string password)

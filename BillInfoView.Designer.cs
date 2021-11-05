@@ -45,9 +45,11 @@ namespace TeaShopManagement
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
+            this.listBill.FullRowSelect = true;
             this.listBill.GridLines = true;
             this.listBill.HideSelection = false;
             this.listBill.Location = new System.Drawing.Point(14, 12);
+            this.listBill.MultiSelect = false;
             this.listBill.Name = "listBill";
             this.listBill.Size = new System.Drawing.Size(514, 374);
             this.listBill.TabIndex = 1;

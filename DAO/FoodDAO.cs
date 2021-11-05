@@ -57,7 +57,7 @@ namespace TeaShopManagement.DAO
 
         public bool AddFood(string name, int idCategory, float price)
         {
-            string query = string.Format("insert tblFoods (name, idCategory, price, status) values ('{0}', {1}, {2}, 'active')",name,idCategory,price);
+            string query = string.Format("insert tblFoods (name, idCategory, price, status) values (N'{0}', {1}, {2}, 'active')",name,idCategory,price);
             int result = DataProvider.Instance.ExecuteNonQuery(query);
 
             return result > 0;
@@ -81,7 +81,7 @@ namespace TeaShopManagement.DAO
 
         public int GetFoodByName (string name)
         {
-            string query = string.Format("select name from tblFoods where name = '{0}'",name);
+            string query = string.Format("select name from tblFoods where name = N'{0}'",name);
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
             if (data.Rows.Count > 0)
