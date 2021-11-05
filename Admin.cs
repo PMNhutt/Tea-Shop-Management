@@ -148,10 +148,17 @@ namespace TeaShopManagement
 
         private void dgvShowBill_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-        
-            id = int.Parse(dgvShowBill.Rows[e.RowIndex].Cells[0].Value.ToString());
-            BillInfoView f = new BillInfoView(id);
-            f.ShowDialog();
+            try
+            {
+                id = int.Parse(dgvShowBill.Rows[e.RowIndex].Cells[0].Value.ToString());
+                BillInfoView f = new BillInfoView(id);
+                f.ShowDialog();
+            }
+            catch
+            {
+                MessageBox.Show("No bill to show!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         private void btnLoad_Click(object sender, EventArgs e)
