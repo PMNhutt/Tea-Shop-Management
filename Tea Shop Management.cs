@@ -249,40 +249,65 @@ namespace TeaShopManagement
         {
             //lấy bàn dựa trên tag của listBIll đang chọn
             Table table = listBill.Tag as Table;
-
-            int idBill = BillDAO.Instance.Get_UnPaid_Bill_ID_By_TableID(table.ID);
-            //lấy idFood từ combobox
-            int idFood = FoodDAO.Instance.GetIdFoodByName(cbTeavFood.Text);
-            //lấy value từ numbericUpDown
-            int count = (int)numericUpDown1.Value;
-
-            if(idBill == -1)
+            if (table != null)
             {
-                MessageBox.Show("Bill empty!", "Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                int idBill = BillDAO.Instance.Get_UnPaid_Bill_ID_By_TableID(table.ID);
+
+                //lấy idFood từ combobox
+                int idFood = FoodDAO.Instance.GetIdFoodByName(cbTeavFood.Text);
+                //lấy value từ numbericUpDown
+                int count = (int)numericUpDown1.Value;
+
+                if (idBill == -1)
+                {
+                    MessageBox.Show("Bill empty!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    BillInfoDAO.Instance.DeleteBillInfo(idBill, idFood, count);
+                }
+                ShowBill(table.ID);
             }
             else
             {
-                BillInfoDAO.Instance.DeleteBillInfo(idBill,idFood,count);
+                MessageBox.Show("No table was chosen!", "Tea Shop Management", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            ShowBill(table.ID);
+            
         }
         private void btnPay_Click(object sender, EventArgs e)
         {
-            //lấy bàn dựa trên tag của listBIll đang chọn
-            Table table = listBill.Tag as Table;
-            int idBill = BillDAO.Instance.Get_UnPaid_Bill_ID_By_TableID(table.ID);
-            //  double totalPrice = Convert.ToDouble(txBTotalPrice.Text.Split('₫')[0]);
-            float totalPrice = float.Parse(txBTotalPrice.Text, NumberStyles.Currency, new CultureInfo("vi-VN"));
-            if (idBill != -1)
+            try
             {
-                if(MessageBox.Show("Check out bill for: " + table.Name, "Tea Shop Management",MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.OK)
+                //lấy bàn dựa trên tag của listBIll đang chọn
+                Table table = listBill.Tag as Table;
+                if (table != null)
                 {
-                    TableDAO.Instance.UpdateTableStatus(table.ID);
-                    BillDAO.Instance.CheckOutBill(idBill, (float)totalPrice);
-                    ShowBill(table.ID);
-                    LoadTableList();
+                    int idBill = BillDAO.Instance.Get_UnPaid_Bill_ID_By_TableID(table.ID);
+                    //  double totalPrice = Convert.ToDouble(txBTotalPrice.Text.Split('₫')[0]);
+                    float totalPrice = float.Parse(txBTotalPrice.Text, NumberStyles.Currency, new CultureInfo("vi-VN"));
+                    if (idBill != -1)
+                    {
+                        if (MessageBox.Show("Check out bill for: " + table.Name, "Tea Shop Management", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.OK)
+                        {
+                            TableDAO.Instance.UpdateTableStatus(table.ID);
+                            BillDAO.Instance.CheckOutBill(idBill, (float)totalPrice);
+                            ShowBill(table.ID);
+                            LoadTableList();
+                        }
+                    }
                 }
+                else
+                {
+                    MessageBox.Show("Nothing to checkout!", "Tea Shop Management", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
+
             }
+            catch
+            {
+                MessageBox.Show("Nothing to checkout!", "Tea Shop Management", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
 
         }
 
