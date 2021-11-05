@@ -410,6 +410,7 @@ namespace TeaShopManagement
             // 
             // dgvAccount
             // 
+            this.dgvAccount.AllowUserToAddRows = false;
             this.dgvAccount.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAccount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAccount.Location = new System.Drawing.Point(3, 3);
@@ -725,6 +726,7 @@ namespace TeaShopManagement
             // 
             // dgvShowBill
             // 
+            this.dgvShowBill.AllowUserToAddRows = false;
             this.dgvShowBill.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvShowBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvShowBill.Location = new System.Drawing.Point(3, 3);

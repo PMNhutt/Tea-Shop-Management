@@ -209,6 +209,7 @@ namespace TeaShopManagement
             {
                 if(dgvAccount.SelectedCells.Count > 0)
                 {
+                    
                     int id = (int)dgvAccount.SelectedCells[0].OwningRow.Cells["Role ID"].Value;
                     Role role = RoleDAO.Instance.GetRoleById(id);
 
@@ -229,9 +230,14 @@ namespace TeaShopManagement
                     cbRoles.SelectedIndex = index;
                 }
             }
-            catch
+            catch(Exception exep)
             {
-
+                if (exep.Message.Equals("Object reference not set to an instance of an object."))
+                {
+                    MessageBox.Show("Nothing to show!", "Admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
+                
             }
         }
 
