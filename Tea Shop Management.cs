@@ -280,11 +280,13 @@ namespace TeaShopManagement
             {
                 //lấy bàn dựa trên tag của listBIll đang chọn
                 Table table = listBill.Tag as Table;
-                if (table != null)
+                //  double totalPrice = Convert.ToDouble(txBTotalPrice.Text.Split('₫')[0]);
+                float totalPrice = float.Parse(txBTotalPrice.Text, NumberStyles.Currency, new CultureInfo("vi-VN"));
+                if ((table != null) && (totalPrice > 0))
                 {
                     int idBill = BillDAO.Instance.Get_UnPaid_Bill_ID_By_TableID(table.ID);
-                    //  double totalPrice = Convert.ToDouble(txBTotalPrice.Text.Split('₫')[0]);
-                    float totalPrice = float.Parse(txBTotalPrice.Text, NumberStyles.Currency, new CultureInfo("vi-VN"));
+                    
+                    
                     if (idBill != -1)
                     {
                         if (MessageBox.Show("Check out bill for: " + table.Name, "Tea Shop Management", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.OK)
