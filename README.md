@@ -24,8 +24,8 @@ With society 4.0, the demand for trade also increases, especially with the highe
 -Admin Management (Staff can't see this tab)
 
 <img src = "PreviewImages/Admin_Food.PNG">
-<img src = "PreviewImages/Admin_Category.PNG">
 <img src = "PreviewImages/Admin_Account.PNG">
+<img src = "PreviewImages/Admin_Category.PNG">
 <img src = "PreviewImages/Admin_Statistical.PNG">
 <img src = "PreviewImages/Admin_BillInfo.PNG">
 
