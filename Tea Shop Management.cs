@@ -132,10 +132,19 @@ namespace TeaShopManagement
 
         void ChangeTableStatus (int id)
         {
+            float totalPrice = float.Parse(txBTotalPrice.Text, NumberStyles.Currency, new CultureInfo("vi-VN"));
             if (MessageBox.Show($"Change table {id - 1} status to 'Empty'?", "Tea Shop Management", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) ==
                 System.Windows.Forms.DialogResult.OK)
             {
-                TableDAO.Instance.UpdateTableStatus(id);
+                if (totalPrice > 0)
+                {
+                    MessageBox.Show("Can't change table status to Empty if bill is not check out or bill still have products!", "Tea Shop Management", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    TableDAO.Instance.UpdateTableStatus(id);
+                }
+                
             }
         }
 
