@@ -24,16 +24,24 @@ namespace TeaShopManagement
             CheckLoginAcc(acc.RoleID);
             LoadTableList();
             LoadCategory();
-            LoadWelcomeUser(acc.AccountName);
+            LoadWelcomeUser(acc.AccountName, acc.RoleID);
         }
 
         
 
         #region Methods
 
-        void LoadWelcomeUser(string name)
+        void LoadWelcomeUser(string name, int role)
         {
-            lbWelcome.Text = "Welcome " + "'"+name+"'";
+            if(role == 1)
+            {
+                lbWelcome.Text = "Welcome " + "'" + name + "'" + " (admin)";
+            }
+            else
+            {
+                lbWelcome.Text = "Welcome " + "'" + name + "'" + " (staff)";
+            }
+            
         }
         void CheckLoginAcc(int role)
         {
