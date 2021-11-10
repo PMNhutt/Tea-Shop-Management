@@ -9,7 +9,11 @@ With society 4.0, the demand for trade also increases, especially with the highe
 
 -Main View
 
-<img src = "PreviewImages/Main.PNG">
+  Login as Staff
+<img src = "PreviewImages/Login_As_Staff.PNG">
+
+  Login as admin
+<img src = "PreviewImages/Login_As_Admin.PNG">
 
 -Add Bill
 
