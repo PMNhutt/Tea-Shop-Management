@@ -3,6 +3,8 @@ With society 4.0, the demand for trade also increases, especially with the highe
 
 ## Preview
 
+We have 2 roles Admin and Staff, both can do the selling function in the main view. 
+
 -Login
 
 <img src = "PreviewImages/Login.PNG">
